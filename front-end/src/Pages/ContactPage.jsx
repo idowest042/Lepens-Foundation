@@ -3,6 +3,8 @@ import { useInView } from 'react-intersection-observer';
 import { useState } from 'react';
 import Navbar from '../Components/Navbar.jsx';
 import Footer from '../Components/Footer.jsx';
+import { axiosInstance } from '../lib/axios';
+import { toast } from 'react-toastify';
 
 const ContactPage = () => {
   const [ref, inView] = useInView({
@@ -11,12 +13,13 @@ const ContactPage = () => {
   });
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
+    FullName: '',
+    Email: '',
+    Subject: '',
+    Message: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -50,18 +53,33 @@ const ContactPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would typically send the form data to your backend
-    console.log('Form submitted:', formData);
-    setIsSubmitted(true);
-    // Reset form after submission
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    });
+    setIsSubmitting(true);
+
+    try {
+      const response = await axiosInstance.post('/admin/send-message', formData);
+      
+      if (response.data) {
+        setIsSubmitted(true);
+        toast.success('Message sent successfully! We\'ll get back to you soon.');
+        
+        // Reset form after submission
+        setFormData({
+          FullName: '',
+          Email: '',
+          Subject: '',
+          Message: ''
+        });
+      } else {
+        toast.error('Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      console.error('Contact form error:', error?.response?.data || error.message);
+      toast.error(error?.response?.data?.message || error?.response?.data?.msg || 'Failed to send message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -262,18 +280,19 @@ const ContactPage = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
                       >
-                        <label htmlFor="name" className="block text-sm font-medium text-[#1F3B4D] mb-2">
+                        <label htmlFor="FullName" className="block text-sm font-medium text-[#1F3B4D] mb-2">
                           Full Name *
                         </label>
                         <input
                           type="text"
-                          id="name"
-                          name="name"
+                          id="FullName"
+                          name="FullName"
                           required
-                          value={formData.name}
+                          value={formData.FullName}
                           onChange={handleChange}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5C899D] focus:border-transparent transition-all duration-200"
                           placeholder="Your full name"
+                          disabled={isSubmitting}
                         />
                       </motion.div>
 
@@ -282,18 +301,19 @@ const ContactPage = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
                       >
-                        <label htmlFor="email" className="block text-sm font-medium text-[#1F3B4D] mb-2">
+                        <label htmlFor="Email" className="block text-sm font-medium text-[#1F3B4D] mb-2">
                           Email Address *
                         </label>
                         <input
                           type="email"
-                          id="email"
-                          name="email"
+                          id="Email"
+                          name="Email"
                           required
-                          value={formData.email}
+                          value={formData.Email}
                           onChange={handleChange}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5C899D] focus:border-transparent transition-all duration-200"
                           placeholder="your.email@example.com"
+                          disabled={isSubmitting}
                         />
                       </motion.div>
                     </div>
@@ -303,16 +323,17 @@ const ContactPage = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.3 }}
                     >
-                      <label htmlFor="subject" className="block text-sm font-medium text-[#1F3B4D] mb-2">
+                      <label htmlFor="Subject" className="block text-sm font-medium text-[#1F3B4D] mb-2">
                         Subject *
                       </label>
                       <select
-                        id="subject"
-                        name="subject"
+                        id="Subject"
+                        name="Subject"
                         required
-                        value={formData.subject}
+                        value={formData.Subject}
                         onChange={handleChange}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5C899D] focus:border-transparent transition-all duration-200"
+                        disabled={isSubmitting}
                       >
                         <option value="">Select a subject</option>
                         <option value="general-inquiry">General Inquiry</option>
@@ -329,31 +350,43 @@ const ContactPage = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4 }}
                     >
-                      <label htmlFor="message" className="block text-sm font-medium text-[#1F3B4D] mb-2">
+                      <label htmlFor="Message" className="block text-sm font-medium text-[#1F3B4D] mb-2">
                         Message *
                       </label>
                       <textarea
-                        id="message"
-                        name="message"
+                        id="Message"
+                        name="Message"
                         required
                         rows="6"
-                        value={formData.message}
+                        value={formData.Message}
                         onChange={handleChange}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5C899D] focus:border-transparent transition-all duration-200 resize-none"
                         placeholder="Please describe how we can help you..."
+                        disabled={isSubmitting}
                       />
                     </motion.div>
 
                     <motion.button
                       type="submit"
-                      className="w-full bg-[#5C899D] text-white py-4 rounded-lg font-semibold text-lg hover:shadow-xl transition-all duration-300"
-                      whileHover={{ 
+                      disabled={isSubmitting}
+                      className="w-full bg-[#5C899D] text-white py-4 rounded-lg font-semibold text-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                      whileHover={!isSubmitting ? { 
                         scale: 1.02,
                         boxShadow: "0 10px 25px -5px rgba(92, 137, 157, 0.4)"
-                      }}
-                      whileTap={{ scale: 0.98 }}
+                      } : {}}
+                      whileTap={!isSubmitting ? { scale: 0.98 } : {}}
                     >
-                      Send Message
+                      {isSubmitting ? (
+                        <>
+                          <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          Sending...
+                        </>
+                      ) : (
+                        'Send Message'
+                      )}
                     </motion.button>
                   </form>
                 )}

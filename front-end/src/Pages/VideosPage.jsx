@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { useState } from 'react';
 import Navbar from '../Components/Navbar.jsx';
 import Footer from '../Components/Footer.jsx';
+import { axiosInstance } from '../lib/axios';
+import { toast } from 'react-toastify';
 
 const VideosPage = () => {
   // Create separate refs for each section
@@ -14,6 +17,10 @@ const VideosPage = () => {
     triggerOnce: true,
     threshold: 0.1,
   });
+
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -37,6 +44,49 @@ const VideosPage = () => {
         duration: 0.6,
         ease: "easeOut"
       }
+    }
+  };
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    
+    if (!email) {
+      toast.error('Please enter your email address');
+      return;
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Send all required fields for the contact/subscription form
+      const subscriptionData = {
+        FullName: 'Video Gallery Subscriber',
+        Email: email,
+        Subject: 'Video Gallery Launch Notification',
+        Message: 'I would like to be notified when the LEPENS Video Gallery launches.'
+      };
+
+      const response = await axiosInstance.post('/admin/send-message', subscriptionData);
+      
+      if (response.data) {
+        setIsSubscribed(true);
+        toast.success('Successfully subscribed! We\'ll notify you when we launch.');
+        setEmail('');
+      } else {
+        toast.error('Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      console.error('Subscription error:', error?.response?.data || error.message);
+      toast.error(error?.response?.data?.message || error?.response?.data?.msg || 'Failed to subscribe. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -161,25 +211,62 @@ const VideosPage = () => {
                 className="bg-gradient-to-r from-[#5C899D] to-[#8AB6C6] rounded-2xl p-8 text-white max-w-2xl mx-auto"
                 variants={itemVariants}
               >
-                <h3 className="text-2xl font-bold mb-4">Be the First to Watch</h3>
-                <p className="opacity-90 mb-6">
-                  Get notified when we launch our video gallery and release new content. 
-                  Stay updated with our latest visual stories and educational materials.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <input
-                    type="email"
-                    placeholder="Enter your email address"
-                    className="flex-1 px-4 py-3 rounded-lg text-[#1F3B4D] focus:outline-none focus:ring-2 focus:ring-white"
-                  />
-                  <motion.button
-                    className="bg-white text-[#5C899D] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.98 }}
+                {isSubscribed ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5 }}
+                    className="text-center"
                   >
-                    Notify Me
-                  </motion.button>
-                </div>
+                    <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <h3 className="text-2xl font-bold mb-2">You're All Set!</h3>
+                    <p className="opacity-90">
+                      Thank you for subscribing. We'll notify you when our video gallery launches.
+                    </p>
+                  </motion.div>
+                ) : (
+                  <>
+                    <h3 className="text-2xl font-bold mb-4">Be the First to Watch</h3>
+                    <p className="opacity-90 mb-6">
+                      Get notified when we launch our video gallery and release new content. 
+                      Stay updated with our latest visual stories and educational materials.
+                    </p>
+                    <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-4">
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter your email address"
+                        className="flex-1 px-4 py-3 rounded-lg text-[#1F3B4D] focus:outline-none focus:ring-2 focus:ring-white"
+                        disabled={isSubmitting}
+                        required
+                      />
+                      <motion.button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="bg-white text-[#5C899D] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center min-w-[140px]"
+                        whileHover={!isSubmitting ? { scale: 1.05 } : {}}
+                        whileTap={!isSubmitting ? { scale: 0.98 } : {}}
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-[#5C899D]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Subscribing...
+                          </>
+                        ) : (
+                          'Notify Me'
+                        )}
+                      </motion.button>
+                    </form>
+                  </>
+                )}
               </motion.div>
             </motion.div>
           </div>

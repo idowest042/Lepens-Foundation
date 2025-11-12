@@ -8,9 +8,12 @@ import ContactPage from './Pages/ContactPage'
 import LegalAwarenessPage from './Pages/LegalAwarenessPage'
 import VideosPage from './Pages/VideosPage'
 import NotFoundPage from './Pages/404'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const App = () => {
   return (
     <div>
+      <ToastContainer/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path='/about' element={<AboutPage />} />
