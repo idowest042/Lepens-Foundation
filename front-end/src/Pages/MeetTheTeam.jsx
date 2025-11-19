@@ -58,15 +58,7 @@ const MeetTheTeam = () => {
   };
 
   const teamMembers = [
-    {
-      id: 1,
-      name: "Dr. Pedro Ndubuisi Manuwa",
-      role: "CEO, NGOFUNDS Consulting Company (Nigeria, UAE, USA)",
-      image: assets.pedro,
-      shortBio: "A doctorate degree holder in Leadership and Management with extensive experience across multiple fields. Dr. Pedro is a financial facilitator and leads finance and donor relations for LEPENS through his company, NGOFUNDS.",
-      longBio: "Dr. Pedro Manuwa brings decades of professional leadership expertise and oversees funding partnerships, donor affairs, and financial facilitation for the LEPENS Foundation."
-    },
-    {
+     {
       id: 2,
       name: "Ikechukwu Maximus Ugwuoke, Esq.",
       role: "Director / Coordinator, LEPENS",
@@ -77,6 +69,14 @@ const MeetTheTeam = () => {
 With a passion for justice and community empowerment, Maximus has dedicated his career to making legal knowledge accessible to all. His expertise spans various areas of law, with a particular focus on human rights and civic education.
 
 Under his leadership, LEPENS has reached thousands of individuals through workshops, community outreach programs, and legal awareness campaigns. His commitment to "Maximum Welfare" drives the foundation's vision of creating a legally empowered society where every citizen understands their rights and responsibilities.`
+    },
+    {
+      id: 1,
+      name: "Dr. Pedro Ndubuisi Manuwa",
+      role: "CEO, NGOFUNDS Consulting Company (Nigeria, UAE, USA)",
+      image: assets.pedro,
+      shortBio: "A doctorate degree holder in Leadership and Management with extensive experience across multiple fields. Dr. Pedro is a financial facilitator and leads finance and donor relations for LEPENS through his company, NGOFUNDS.",
+      longBio: "Dr. Pedro Manuwa brings decades of professional leadership expertise and oversees funding partnerships, donor affairs, and financial facilitation for the LEPENS Foundation."
     },
     {
       id: 3,
