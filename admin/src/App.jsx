@@ -8,16 +8,15 @@ import AdminLogin from './Pages/AdminLogin.jsx';
 import Home from './Pages/Home.jsx';
 import AdminMessages from './components/AdminMessages.jsx';
 import { AuthStore } from './store/authStore.js';
-
 const App = () => {
-  // ✅ Get state from store correctly
   const authUser = AuthStore((state) => state.authUser);
+  const token = AuthStore((state) => state.token); // ← Add this
   const checkAuth = AuthStore((state) => state.checkAuth);
   const isCheckingAuth = AuthStore((state) => state.isCheckingAuth);
   
   useEffect(() => {
     checkAuth();
-  }, [checkAuth]); // ✅ Add checkAuth to dependencies
+  }, [checkAuth]);
   
   if (isCheckingAuth) {
     return (
@@ -46,15 +45,41 @@ const App = () => {
     );
   }
   
+  // ✅ User is authenticated if they have BOTH authUser AND token (which means verified)
+  const isAuthenticated = authUser && token;
+  
   return (
     <div>
       <ToastContainer />
       <Routes>
-        <Route path="/signup" element={!authUser ? <AdminSignup /> : <Navigate to="/" />} />
-        <Route path="/verify" element={<VerifyAccount />} />
-        <Route path="/login" element={!authUser ? <AdminLogin /> : <Navigate to="/" />} />
-        <Route path="/" element={authUser ? <Home /> : <Navigate to="/login" />} />
-        <Route path="/messages" element={authUser ? <AdminMessages /> : <Navigate to="/login" />} />
+        {/* Allow access if not authenticated */}
+        <Route 
+          path="/signup" 
+          element={!isAuthenticated ? <AdminSignup /> : <Navigate to="/" />} 
+        />
+        
+        {/* Allow access if user exists but not verified */}
+        <Route 
+          path="/verify" 
+          element={authUser && !authUser.isVerified ? <VerifyAccount /> : <Navigate to="/" />} 
+        />
+        
+        {/* Allow access if not authenticated */}
+        <Route 
+          path="/login" 
+          element={!isAuthenticated ? <AdminLogin /> : <Navigate to="/" />} 
+        />
+        
+        {/* Require authentication (verified + token) */}
+        <Route 
+          path="/" 
+          element={isAuthenticated ? <Home /> : <Navigate to="/login" />} 
+        />
+        
+        <Route 
+          path="/messages" 
+          element={isAuthenticated ? <AdminMessages /> : <Navigate to="/login" />} 
+        />
       </Routes>
     </div>
   )

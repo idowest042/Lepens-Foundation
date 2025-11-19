@@ -14,38 +14,43 @@ export const AuthStore = create(
       verificationInProgress: false,
       token: null,
 
-      signup: async (data, navigate) => {
-        set({ isSignup: true });
-        try {
-          const response = await axiosInstance.post("/auth/signup", data);
-          
-          console.log("📥 Signup response:", response.data);
-          
-          const userId = response.data.userId;
-          
-          const userData = {
-            id: userId,
-            email: data.email,
-            name: data.name,
-            isVerified: false
-          };
-          
-          console.log("💾 Saving authUser:", userData);
-          
-          set({ authUser: userData });
-          toast.success("Verify your Email");
-          
-          if (navigate) {
-            navigate("/verify");
-          }
-        } catch (error) {
-          console.error("Signup Error:", error.response?.data || error.message);
-          toast.error(error.response?.data?.message || "Signup failed.");
-          throw error;
-        } finally {
-          set({ isSignup: false });
-        }
-      },
+     signup: async (data, navigate) => {
+  set({ isSignup: true });
+  try {
+    const response = await axiosInstance.post("/auth/signup", data);
+    
+    console.log("📥 Signup response:", response.data);
+    
+    const userId = response.data.userId;
+    
+    const userData = {
+      id: userId,
+      email: data.email,
+      name: data.name,
+      isVerified: false
+    };
+    
+    console.log("💾 Saving authUser:", userData);
+    
+    // ✅ Clear token for unverified users
+    set({ 
+      authUser: userData,
+      token: null // ← Important!
+    });
+    
+    toast.success("Verify your Email");
+    
+    if (navigate) {
+      navigate("/verify");
+    }
+  } catch (error) {
+    console.error("Signup Error:", error.response?.data || error.message);
+    toast.error(error.response?.data?.message || "Signup failed.");
+    throw error;
+  } finally {
+    set({ isSignup: false });
+  }
+},
 
       verifyUser: async (data) => {
         set({ verificationInProgress: true });
