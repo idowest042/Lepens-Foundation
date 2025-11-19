@@ -85,6 +85,14 @@ Under his leadership, LEPENS has reached thousands of individuals through worksh
       image: assets.joy,
       shortBio: "Joy is a legal practitioner and certified Alternative Dispute Resolution consultant committed to justice, legal empowerment, and peaceful conflict resolution.",
       longBio: "Joy brings specialized expertise in Alternative Dispute Resolution to the LEPENS Foundation. Her commitment to justice and legal empowerment complements the foundation's mission to provide accessible legal education and peaceful conflict resolution mechanisms to communities across Enugu State."
+    },
+    {
+      id: 4,
+      name: "Olanrewaju Oluwaseyi",
+      role: "IT Specialist & Business Consultant",
+      image: assets.oluwa,
+      shortBio: "Oluwaseyi is a Cybersecurity Trainer, Network & System Engineer, IT Business Development Consultant, and Social Media Director/Manager for the Law Enlightenment Project Enugu State (LEPENS).",
+      longBio: "Oluwaseyi brings specialized expertise in IT and cybersecurity to the LEPENS Foundation. His commitment to leveraging technology for social impact complements the foundation's mission to provide accessible legal education and support to communities across Enugu State."
     }
   ];
 

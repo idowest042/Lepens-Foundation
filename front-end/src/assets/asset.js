@@ -10,6 +10,7 @@ import legal from "../assets/legal.jpg"
 import pedro from "../assets/pedro.jpg"
 import ike from "../assets/ike.jpg"
 import joy from "../assets/joy.jpg"
+import oluwa from "../assets/oluwasayi.jpg"
 export const assets = {
     logo,
     img1,
@@ -22,5 +23,6 @@ export const assets = {
     legal,
     pedro,
     ike,
-    joy
+    joy,
+    oluwa
 }
