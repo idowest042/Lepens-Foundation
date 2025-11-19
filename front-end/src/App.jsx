@@ -10,6 +10,7 @@ import VideosPage from './Pages/VideosPage'
 import NotFoundPage from './Pages/404'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import MeetTheTeam from './Pages/MeetTheTeam';
 const App = () => {
   return (
     <div>
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/radio" element={<RadioPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/legal-awareness" element={<LegalAwarenessPage />} />
+        <Route path="/meet-the-team" element={<MeetTheTeam />} />
         <Route path="/videos" element={<VideosPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

@@ -7,6 +7,9 @@ import img6 from "../assets/afri (2).jpg"
 import img7 from "../assets/afri (3).jpg"
 import img8 from "../assets/afri (4).jpg"
 import legal from "../assets/legal.jpg"
+import pedro from "../assets/pedro.jpg"
+import ike from "../assets/ike.jpg"
+import joy from "../assets/joy.jpg"
 export const assets = {
     logo,
     img1,
@@ -16,5 +19,8 @@ export const assets = {
     img6,
     img7,
     img8,
-    legal
+    legal,
+    pedro,
+    ike,
+    joy
 }

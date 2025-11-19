@@ -61,23 +61,23 @@ const About = () => {
   const coreValues = [
     {
       icon: "•",
-      title: "Legal Education for All",
-      description: "We provide legal awareness and education to underserved communities, empowering citizens with knowledge of their rights."
+      title: "Project Goal",
+      description: "To promote legal awareness and education—particularly on the Laws of Enugu State—enhance access to justice, and foster a culture of legal compliance across the state."
     },
     {
       icon: "•",
-      title: "Compassion & Service",
-      description: "Our actions are rooted in empathy, love, and genuine care for the communities we serve in Enugu State."
+      title: "Project Objectives",
+      description: "Increase public understanding of national laws and Enugu State laws, including newly enacted legislation."
     },
     {
       icon: "•",
-      title: "Integrity & Justice",
-      description: "We maintain transparency, accountability, and uphold justice in all our initiatives and operations."
+      title: "Legal Education and Awareness",
+      description: "Weekly dissemination of simplified legal content, including key provisions of Enugu State laws."
     },
     {
       icon: "•",
-      title: "Community Collaboration",
-      description: "We work with local organizations, volunteers, and stakeholders to create lasting impact and sustainable change."
+      title: "Legal Compliance and Enforcement",
+      description: "Sensitization on civic obligations and penalties under state laws Public awareness campaigns on state-specific laws (e.g., Environmental Laws, Public Health Laws, Traffic Laws, Gender-Based Violence Laws, etc.)"
     }
   ];
 
@@ -108,9 +108,9 @@ const About = () => {
             >
               <div className="w-16 h-1 bg-[#5C899D] mb-4"></div>
               <p className="text-lg md:text-xl text-[#2C3E50] leading-relaxed">
-                LEPENS Foundation is a non-profit organization dedicated to transforming lives through 
-                <span className="font-semibold text-[#5C899D]"> legal education, community empowerment, and civic engagement</span>. 
-                We believe that every citizen deserves access to legal knowledge and opportunities that help them understand and exercise their rights.
+               The Law Enlightenment Project (Nkowa Iwu) Enugu State – LEPENS is a citizen-focused initiative dedicated to simplifying the law and bringing legal knowledge directly to every home, community, institution, and digital space in Enugu State.
+                The project provides free legal education on the Constitution, national laws, and especially the Laws of Enugu State, ensuring residents understand their rights, duties, and available justice pathways.
+LEPENS is implemented in partnership with the Enugu State Ministry of Justice and supported by legal professionals, social media experts, and community actors united by the mission to make the law accessible to all.
               </p>
             </motion.div>
 
@@ -119,7 +119,7 @@ const About = () => {
               className="space-y-6 mb-8"
               variants={itemVariants}
             >
-              <h3 className="text-2xl font-semibold text-[#2C3E50] mb-4">What Drives Us</h3>
+              <h3 className="text-2xl font-semibold text-[#2C3E50] mb-4">Project Framework</h3>
               <div className="grid gap-6">
                 {coreValues.map((value, index) => (
                   <motion.div

@@ -47,28 +47,28 @@ const Services = () => {
 
   const programs = [
     {
-      image: assets.img1, // Smiling child reading - for Scholarship
-      title: "Scholarship Support",
-      description: "Providing educational scholarships for underprivileged students to access quality education and legal training programs.",
-      stats: "200+ Students Supported"
+      image: assets.img1,
+      title: "Legal Education & Awareness",
+      description: "Weekly dissemination of simplified legal content on the Constitution, national laws, and Enugu State laws through radio, video, and social media platforms handled by qualified lawyers.",
+      stats: "Daily Content Delivery"
     },
     {
-      image: assets.img4, // Volunteers teaching - for Community Outreach
-      title: "Community Outreach & Health Awareness",
-      description: "Promoting wellness, hygiene, and mental health awareness through legal rights education in local communities.",
-      stats: "50+ Communities Reached"
+      image: assets.img4,
+      title: "Community Legal Aid Clinics",
+      description: "Free pro bono legal assistance for vulnerable groups including women, children, youths, and persons with disabilities. Providing guidance on dispute resolution and court processes.",
+      stats: "17 LGAs Coverage"
     },
     {
-      image: assets.img8, // Teacher helping students - for Workshops
-      title: "Skill Empowerment Workshops",
-      description: "Training young adults in digital skills, entrepreneurship, and vocational development for sustainable livelihoods.",
-      stats: "300+ Youth Trained"
+      image: assets.img8,
+      title: "Legal Compliance & Enforcement",
+      description: "Public awareness campaigns on state-specific laws including Environmental Laws, Public Health Laws, Traffic Laws, and Gender-Based Violence Laws to improve compliance.",
+      stats: "Statewide Sensitization"
     },
     {
-      image: assets.img5,
-      title: "Mentorship & Career Guidance",
-      description: "Connecting students with legal professionals and mentors who help them plan successful futures in law and justice.",
-      stats: "75+ Mentorship Matches"
+      image: assets.img2,
+      title: "Access to Justice",
+      description: "Strengthening the relationship between citizens and justice institutions through transparent education, ensuring every resident understands their rights and available justice pathways.",
+      stats: "Justice for All"
     }
   ];
 
@@ -92,20 +92,20 @@ const Services = () => {
           animate={inView ? "visible" : "hidden"}
         >
           <motion.h2
-            className="text-4xl md:text-5xl font-bold text-[#5C899D] mb-4"
+            className="text-4xl md:text-5xl font-bold text-[#0A2342] mb-4"
             variants={titleVariants}
           >
             Our Programs & Initiatives
           </motion.h2>
           <motion.div
-            className="w-24 h-1 bg-gradient-to-r from-[#5C899D] to-[#8AB6C6] mx-auto rounded-full"
+            className="w-24 h-1 bg-gradient-to-r from-[#CBA135] to-[#d8b44c] mx-auto rounded-full"
             variants={titleVariants}
           />
           <motion.p
-            className="text-xl text-[#2C3E50] mt-6 max-w-2xl mx-auto"
+            className="text-xl text-[#2C3E50] mt-6 max-w-3xl mx-auto leading-relaxed"
             variants={titleVariants}
           >
-            Transforming lives through legal education, community empowerment, and sustainable development
+            Empowering citizens with knowledge of the law, improving access to justice, and fostering a culture of legal compliance across Enugu State
           </motion.p>
         </motion.div>
 
@@ -149,7 +149,7 @@ const Services = () => {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.1 + 0.5 }}
                   >
-                    <span className="text-xs font-semibold text-[#5C899D]">
+                    <span className="text-xs font-semibold text-[#0A2342]">
                       {program.stats}
                     </span>
                   </motion.div>
@@ -157,18 +157,16 @@ const Services = () => {
 
                 {/* Content */}
                 <div className="p-6 flex-1 flex flex-col">
-                  <h3 className="text-xl font-bold text-[#5C899D] mb-3 group-hover:text-[#4a7688] transition-colors duration-300 leading-tight">
+                  <h3 className="text-xl font-bold text-[#0A2342] mb-3 group-hover:text-[#CBA135] transition-colors duration-300 leading-tight">
                     {program.title}
                   </h3>
                   <p className="text-[#2C3E50] text-opacity-80 mb-6 flex-1 leading-relaxed text-sm">
                     {program.description}
                   </p>
-                  
-                  
                 </div>
 
                 {/* Hover Effect Border */}
-                <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-[#5C899D] group-hover:border-opacity-20 transition-all duration-300 pointer-events-none" />
+                <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-[#CBA135] group-hover:border-opacity-30 transition-all duration-300 pointer-events-none" />
               </div>
             </motion.div>
           ))}
@@ -181,8 +179,11 @@ const Services = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.8, duration: 0.6 }}
         >
-          <p className="text-lg text-[#2C3E50] mb-6">
-            Join us in creating lasting change in our communities
+          <p className="text-lg text-[#2C3E50] mb-4">
+            Join us in promoting justice, knowledge, and civic responsibility
+          </p>
+          <p className="text-base text-[#2C3E50] text-opacity-70">
+            Making the law accessible to every citizen across all 17 LGAs of Enugu State
           </p>
         </motion.div>
       </div>

@@ -33,8 +33,8 @@ const Navbar = () => {
     { name: 'Legal Awareness', href: '/legal-awareness' },
     { name: 'Radio & Podcast', href: '/radio' },
     { name: 'Videos', href: '/videos' },
-    { name: 'Programs', href: '/program' },
     { name: 'Contact', href: '/contact' },
+    { name: 'The Team', href: '/meet-the-team' },
   ];
 
   const navbarVariants = {
@@ -111,7 +111,7 @@ const Navbar = () => {
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
+            <div className="ml-10 flex items-baseline space-x-9">
               {navLinks.map((link) => (
                 <motion.div
                   key={link.name}

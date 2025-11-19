@@ -264,27 +264,27 @@ const HeroSection = () => {
               variants={subtitleVariants}
             >
               <Link to="/about">
-              <motion.button
-                className="bg-[#CBA135] text-[#0A2342] px-8 py-4 rounded-lg font-bold text-lg hover:bg-[#d8b44c] transition-colors duration-200 shadow-lg"
-                variants={buttonVariants}
-                whileHover="hover"
-                whileTap="tap"
-              >
-                Learn More
-              </motion.button>
+                <motion.button
+                  className="bg-[#CBA135] text-[#0A2342] px-8 py-4 rounded-lg font-bold text-lg hover:bg-[#d8b44c] transition-colors duration-200 shadow-lg"
+                  variants={buttonVariants}
+                  whileHover="hover"
+                  whileTap="tap"
+                >
+                  Learn More
+                </motion.button>
               </Link>
               <Link to="/radio">
-              <motion.button
-                className="border-2 border-[#CBA135] text-[#CBA135] px-8 py-4 rounded-lg font-bold text-lg hover:bg-[#CBA135] hover:text-[#0A2342] transition-all duration-200 shadow-lg"
-                variants={buttonVariants}
-                whileHover="hover"
-                whileTap="tap"
-              >
-                Listen to Radio
-              </motion.button>
-            </Link>
-          </motion.div>
-        </div>
+                <motion.button
+                  className="border-2 border-[#CBA135] text-[#CBA135] px-8 py-4 rounded-lg font-bold text-lg hover:bg-[#CBA135] hover:text-[#0A2342] transition-all duration-200 shadow-lg"
+                  variants={buttonVariants}
+                  whileHover="hover"
+                  whileTap="tap"
+                >
+                  Listen to Radio
+                </motion.button>
+              </Link>
+            </motion.div>
+          </div>
 
           {/* Right Media Block */}
           <motion.div
@@ -293,12 +293,25 @@ const HeroSection = () => {
           >
             <div className="relative w-full max-w-lg">
               {/* Video/Image Container */}
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-[#CBA135] bg-gradient-to-br from-[#0d2a4d] to-[#0A2342] backdrop-blur-sm">
-                {/* Placeholder for future video */}
-                <div className="aspect-video flex items-center justify-center bg-gradient-to-br from-[#0d2a4d] to-[#0A2342]">
-                  <div className="text-center p-8">
+              <a 
+                href="https://youtu.be/79fRZaYijvc?si=sncJCGkuGVZmTGZ1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block relative rounded-2xl overflow-hidden shadow-2xl border-2 border-[#CBA135] bg-gradient-to-br from-[#0d2a4d] to-[#0A2342] backdrop-blur-sm group"
+              >
+                {/* YouTube Thumbnail */}
+                <div className="aspect-video flex items-center justify-center bg-gradient-to-br from-[#0d2a4d] to-[#0A2342] relative">
+                  <img 
+                    src="https://img.youtube.com/vi/79fRZaYijvc/maxresdefault.jpg"
+                    alt="Law Enlightenment Project Introduction Video"
+                    className="absolute inset-0 w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                    }}
+                  />
+                  <div className="relative z-10 text-center p-8">
                     <motion.div
-                      className="w-20 h-20 bg-[#CBA135] rounded-full flex items-center justify-center mx-auto mb-4"
+                      className="w-20 h-20 bg-[#CBA135] rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
                       animate={{
                         scale: [1, 1.1, 1],
                       }}
@@ -327,8 +340,7 @@ const HeroSection = () => {
                 
                 {/* Play Button Overlay */}
                 <motion.div
-                  className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 opacity-0 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
-                  whileHover={{ opacity: 1 }}
+                  className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 >
                   <div className="bg-[#CBA135] text-[#0A2342] rounded-full p-6 shadow-2xl">
                     <svg 
@@ -340,7 +352,7 @@ const HeroSection = () => {
                     </svg>
                   </div>
                 </motion.div>
-              </div>
+              </a>
 
               {/* Floating Elements */}
               <motion.div

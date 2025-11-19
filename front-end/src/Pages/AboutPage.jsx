@@ -168,17 +168,10 @@ const AboutPage = () => {
               <h2 className="text-4xl font-bold text-[#1F3B4D] mb-6">Our Story</h2>
               <div className="space-y-4 text-[#1F3B4D] opacity-80 leading-relaxed">
                 <p>
-                  Founded in 2018, LEPENS Foundation emerged from a deep-seated commitment to address 
-                  the educational and developmental challenges facing communities in Enugu State, Nigeria.
+                 he Law Enlightenment Project (Nkowa Iwu) Enugu State – LEPENS is a citizen-focused initiative dedicated to simplifying the law and bringing legal knowledge directly to every home, community, institution, and digital space in Enugu State. The project provides free legal education on the Constitution, national laws, and especially the Laws of Enugu State, ensuring residents understand their rights, duties, and available justice pathways.
                 </p>
                 <p>
-                  What began as a small initiative to provide scholarships to underprivileged students 
-                  has grown into a comprehensive community development organization impacting thousands 
-                  of lives across multiple sectors.
-                </p>
-                <p>
-                  Today, we stand as a beacon of hope, dedicated to creating sustainable change through 
-                  education, healthcare outreach, youth empowerment, and community development programs.
+                 LEPENS is implemented in partnership with the Enugu State Ministry of Justice and supported by legal professionals, social media experts, and community actors united by the mission to make the law accessible to all.
                 </p>
               </div>
               
